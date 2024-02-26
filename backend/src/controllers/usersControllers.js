@@ -3,13 +3,14 @@ const Session = require("../models/sessionModel")
 const mongoose = require("mongoose")
 const { uuid } = require('uuidv4');
 
-const bcrypt = require('bcrypt');
+/* const bcrypt = require('bcrypt'); */
 
 const userSignUp = async (req, res) => {
     const { email, password, passwordConfirmation } = req.body;
 
 
     const hasEmail = await Users.findOne({ email });
+    console.log(hasEmail)
 
     if (hasEmail) {
         return res.status(400).json({ message: 'Os dados introduzidos não são válidos.', errors: { email: 'O endereço introduzido já está registado.' } });
