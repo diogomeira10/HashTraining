@@ -15,3 +15,7 @@ const router = express.Router();
 router.post('/addPost', addPost);
 
 router.post('/post/:postId/like', likePost);
+
+
+module.exports = router;
+
