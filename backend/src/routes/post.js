@@ -1,6 +1,9 @@
 const express = require("express")
 
-const { addPost } = require("../controllers/postControllers")
+const { 
+    addPost,
+    likePost
+} = require("../controllers/postControllers")
 
 
 const router = express.Router();
@@ -10,3 +13,5 @@ const router = express.Router();
 
 //adicionar um novo post
 router.post('/addPost', addPost);
+
+router.post('/post/:postId/like', likePost);
