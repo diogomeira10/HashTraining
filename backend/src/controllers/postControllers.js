@@ -12,7 +12,7 @@ const addPost = async (req, res) => {
       const { title, content, author } = req.body;
   
     
-      const existingUser = await User.findById(author);
+      const existingUser = await Users.findById(author);
       if (!existingUser) {
         return res.status(400).json({ error: "Author not found" });
       }
@@ -38,7 +38,7 @@ const addPost = async (req, res) => {
 
   const likePost = async (req,res) => {
     const { postId } = req.params;
-  const { userId } = req.body;
+    const { userId } = req.body;
 
   try {
   
