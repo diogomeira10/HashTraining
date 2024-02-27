@@ -4,20 +4,21 @@ import { CreateAccount } from "./pages/CreateAccount";
 import { Feed } from "./pages/Feed";
 import { useState /* useEffect */ } from "react";
 
+
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userExists, setUserExists] = useState(false);
   const[token, setToken] = useState("")
   console.log(email);
   console.log(password);
   console.log(newEmail);
-  console.log(newPassword);
-  console.log(userExists);
+  console.log(newPassword)
   console.log(token);
+
+
 
   //Handle Form Inputs
   const handlePasswordChange = (e) => {
@@ -37,29 +38,14 @@ function App() {
     setConfirmPassword(e.target.value);
   };
 
+
+  const handleToken = (token) => {
+    setToken(token)
+  }
+
   //Fetching Functions
   //Login
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setToken(data.token);
-      } else {
-        console.error('Error logging in:', data.message);
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-    }
-  };
+  
 
   return (
     <BrowserRouter>
@@ -72,7 +58,7 @@ function App() {
               onChangeEmail={handleEmailChange}
               email={email}
               password={password}
-              userExists={userExists}
+              handleToken={handleToken}
             />
           }
         />

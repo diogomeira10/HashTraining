@@ -1,7 +1,37 @@
 import { Link } from "react-router-dom"
 import Logo from "../assets/logo_home.png";
+import { useNavigate } from 'react-router-dom';
 
-export function Home({ email, password, onChangeEmail, onChangePassword, userExists}) {
+export function Home({ email, password, onChangeEmail, onChangePassword, handleToken}) {
+
+  const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    console.log('hello')
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        handleToken(data.token);
+        navigate('/feed')
+      } else {
+        console.error('Error logging in:', data.message);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
+
+
   return (
     <div className="bg-black flex-col text-white h-screen w-screen flex items-center justify-center">
       <div className="">
@@ -21,9 +51,9 @@ export function Home({ email, password, onChangeEmail, onChangePassword, userExi
         </form>
       </div>
       <div className="mt-6">
-        <Link to="/">
+        <button onClick={handleLogin}>
             <p className="font-bold">Login</p>
-        </Link>
+        </button>
         <Link to="/createAccount">
             <p className="font-bold">Criar Conta</p>
         </Link>
