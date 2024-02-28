@@ -3,34 +3,159 @@ import { CgAdd } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
 import { PiPlugBold } from "react-icons/pi";
 import { FaUser } from "react-icons/fa";
-import { useState } from "react"
+import { useState } from "react";
 
-export function Navbar ({setComponent}) {
+export function Navbar({ setComponent }) {
+  //NavBar SelectedAnimation
+  const [selectedTab, setSelectedTab] = useState("home");
+  console.log(selectedTab);
 
-    //NavBar SelectedAnimation
-    const [selectedTab, setSelectedTab] = useState("home");
+  const handleHomeSelect = () => {
+    setSelectedTab("home");
+    setComponent("home");
+  };
+  const handleSearchSelect = () => {
+    setSelectedTab("search");
+    setComponent("search");
+  };
+  const handlePostSelect = () => {
+    setSelectedTab("add");
+    setComponent("add");
+  };
+  const handleFriendsSelect = () => {
+    setSelectedTab("friends");
+    setComponent("friends");
+  };
+  const handleProfileSelect = () => {
+    setSelectedTab("profile");
+    setComponent("profile");
+  };
 
-    
+  return (
+    <div className="navbar fixed bottom-0 w-full bg-black p-4 shadow-md border-t-2" style={{ borderColor: '#419EF4' }}>
 
-    return (
-        <div className="navbar fixed bottom-0 w-full bg-white p-4 shadow-md">
-          <nav className="flex justify-around">
-            <a onClick={() => setComponent("home")}>
-              <FaHome />
-            </a>
-            <a onClick={() => setComponent("add")}>
-              <CgAdd />
-            </a>
-            <a onClick={() => setComponent("search")}>
-              <IoSearch />
-            </a>
-            <a onClick={() => setComponent("friends")}>
-              <PiPlugBold />
-            </a>
-            <a onClick={() => setComponent("profile")}>
-              <FaUser />
-            </a>
-          </nav>
-        </div>
-      );
-    }
+      <nav className="flex justify-around">
+        <a
+          onClick={handleHomeSelect}
+          style={{
+            fontSize: "24px",
+            position: "relative",
+            paddingBottom: selectedTab === "home" ? "8px" : "0",
+          }}
+        >
+          <FaHome style={{color: "white"}}/>
+          {selectedTab === "home" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#419EF4",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            ></div>
+          )}
+        </a>
+        <a
+          onClick={handleSearchSelect}
+          style={{
+            fontSize: "24px",
+            position: "relative",
+            paddingBottom: selectedTab === "search" ? "8px" : "0",
+          }}
+        >
+          <IoSearch style={{color: "white"}}/>
+          {selectedTab === "search" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#419EF4",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            ></div>
+          )}
+        </a>
+        <a
+          onClick={handlePostSelect}
+          style={{
+            fontSize: "24px",
+            position: "relative",
+            paddingBottom: selectedTab === "add" ? "8px" : "0",
+          }}
+        >
+          <CgAdd style={{ color: "#419EF4", fontSize: "32px" }} />
+          {selectedTab === "add" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "white",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            ></div>
+          )}
+        </a>
+        <a
+          onClick={handleFriendsSelect}
+          style={{
+            fontSize: "24px",
+            position: "relative",
+            paddingBottom: selectedTab === "friends" ? "8px" : "0",
+          }}
+        >
+          <PiPlugBold style={{color: "white"}}/>
+          {selectedTab === "friends" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#419EF4",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            ></div>
+          )}
+        </a>
+        <a
+          onClick={handleProfileSelect}
+          style={{
+            fontSize: "24px",
+            position: "relative",
+            paddingBottom: selectedTab === "profile" ? "8px" : "0",
+          }}
+        >
+          <FaUser style={{color: "white"}}/>
+          {selectedTab === "profile" && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#419EF4",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            ></div>
+          )}
+        </a>
+      </nav>
+    </div>
+  );
+}
