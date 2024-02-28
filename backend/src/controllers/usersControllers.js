@@ -1,7 +1,7 @@
 const Users = require("../models/userModel")
 const Session = require("../models/sessionModel")
 const mongoose = require("mongoose")
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid')
 
 /* const bcrypt = require('bcrypt'); */
 
@@ -53,7 +53,7 @@ const userLogin = async (req, res) => {
     }
 
 
-    const token = uuid();
+    const token = uuidv4();
 
     
     await Session.create({ userId: user._id, token });

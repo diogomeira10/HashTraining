@@ -21,7 +21,7 @@ export function Home({ email, password, onChangeEmail, onChangePassword, handleT
 
       if (response.ok) {
         handleToken(data.token);
-        navigate('/feed')
+        navigate('/layout')
       } else {
         console.error('Error logging in:', data.message);
       }

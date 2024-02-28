@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { CreateAccount } from "./pages/CreateAccount";
-import { Feed } from "./pages/Feed";
-import { useState /* useEffect */ } from "react";
+import { useState } from "react";
+import { Layout } from "./pages/Layout";
 
 
 function App() {
@@ -41,11 +41,7 @@ function App() {
 
   const handleToken = (token) => {
     setToken(token)
-  }
-
-  //Fetching Functions
-  //Login
-  
+  }  
 
   return (
     <BrowserRouter>
@@ -75,7 +71,8 @@ function App() {
             />
           }
         />
-        <Route path="/feed" element={<Feed />}/>
+        <Route path="/layout" element={<Layout />} />
+        
       </Routes>
     </BrowserRouter>
   );
