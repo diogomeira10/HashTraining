@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const userRoutes = require("./src/routes/user");
 const postRoutes = require("./src/routes/post")
+const friendsRoutes = require("./src/routes/friends")
 
 app.use(express.json());
 
@@ -14,6 +15,7 @@ app.use((req, res, next) => {
 
 app.use('/api', userRoutes);
 app.use('/api', postRoutes);
+app.use("/api", friendsRoutes)
 
 connectToDatabase().then(() => {
   console.log("Connected to database");

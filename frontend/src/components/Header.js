@@ -5,7 +5,7 @@ export function Header() {
   return (
     <div className="pt-8">
       <div className="flex justify-between">
-        <img className="w-44 ml-4" src={logoExtenso} />
+        <img className="w-44 ml-4" src={logoExtenso} alt="logo"/>
         <div className="mr-4">
           <RxHamburgerMenu style={{ color: "white", fontSize: "2rem"}} />
         </div>

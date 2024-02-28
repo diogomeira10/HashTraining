@@ -35,7 +35,7 @@ export function Navbar({ setComponent }) {
     <div className="navbar fixed bottom-0 w-full bg-black p-4 shadow-md border-t-2" style={{ borderColor: '#419EF4' }}>
 
       <nav className="flex justify-around">
-        <a
+        <p
           onClick={handleHomeSelect}
           style={{
             fontSize: "24px",
@@ -58,8 +58,8 @@ export function Navbar({ setComponent }) {
               }}
             ></div>
           )}
-        </a>
-        <a
+        </p>
+        <p
           onClick={handleSearchSelect}
           style={{
             fontSize: "24px",
@@ -82,8 +82,8 @@ export function Navbar({ setComponent }) {
               }}
             ></div>
           )}
-        </a>
-        <a
+        </p>
+        <p
           onClick={handlePostSelect}
           style={{
             fontSize: "24px",
@@ -106,8 +106,8 @@ export function Navbar({ setComponent }) {
               }}
             ></div>
           )}
-        </a>
-        <a
+        </p>
+        <p
           onClick={handleFriendsSelect}
           style={{
             fontSize: "24px",
@@ -130,8 +130,8 @@ export function Navbar({ setComponent }) {
               }}
             ></div>
           )}
-        </a>
-        <a
+        </p>
+        <p
           onClick={handleProfileSelect}
           style={{
             fontSize: "24px",
@@ -154,7 +154,7 @@ export function Navbar({ setComponent }) {
               }}
             ></div>
           )}
-        </a>
+        </p>
       </nav>
     </div>
   );
