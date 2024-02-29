@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Post } from "../../components/Post";
 
 export function Feed ({userId}) {
 
@@ -27,6 +28,9 @@ export function Feed ({userId}) {
       console.log(posts)
    
 
-    return <div className="text-white">Feed</div>
+    return <div className="text-white flex flex-col justify-center items-center">
+      <div>Feed</div>
+      <Post />
+      </div>
 }
 
