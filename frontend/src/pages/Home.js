@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Logo from "../assets/logo_home.png";
 import { useNavigate } from 'react-router-dom';
 
-export function Home({ email, password, onChangeEmail, onChangePassword, handleToken}) {
+export function Home({ email, password, onChangeEmail, onChangePassword, handleToken, setUserId}) {
 
   const navigate = useNavigate()
 
@@ -14,13 +14,14 @@ export function Home({ email, password, onChangeEmail, onChangePassword, handleT
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username: email, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         handleToken(data.token);
+        setUserId(data._id)
         navigate('/layout')
       } else {
         console.error('Error logging in:', data.message);

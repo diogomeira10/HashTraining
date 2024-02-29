@@ -9,7 +9,7 @@ const addPost = async (req, res) => {
 
     try {
    
-      const { title, content, author } = req.body;
+      const {content, author, imageUrl } = req.body;
   
     
       const existingUser = await Users.findById(author);
@@ -19,9 +19,9 @@ const addPost = async (req, res) => {
   
    
       const newPost = new Post({
-        title,
         content,
         author: existingUser._id,
+        imageUrl
       });
   
   
@@ -35,7 +35,21 @@ const addPost = async (req, res) => {
     }
   };
 
+  const getPosts = async (req, res) => {
+    try {
+      const posts = await Post.find({})
+      console.log(posts)
+      res.status(200).json(posts);
+    } catch (error) {
+      console.error("Error getting posts:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };
 
+
+
+
+  //Like Post
   const likePost = async (req,res) => {
     const { postId } = req.params;
     const { userId } = req.body;
@@ -73,5 +87,6 @@ const addPost = async (req, res) => {
   
 module.exports = {
     addPost,
-    likePost
+    likePost,
+    getPosts
 }

@@ -2,7 +2,8 @@ const express = require("express")
 
 const { 
     addPost,
-    likePost
+    likePost,
+    getPosts
 } = require("../controllers/postControllers")
 
 
@@ -13,6 +14,8 @@ const router = express.Router();
 
 //adicionar um novo post
 router.post('/addPost', addPost);
+
+router.get("/getPosts", getPosts)
 
 router.post('/post/:postId/like', likePost);
 

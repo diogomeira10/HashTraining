@@ -1,6 +1,6 @@
 import { FaBoltLightning } from "react-icons/fa6";
 
-export function Profile() {
+export function Profile({userId}) {
   return (
     <div className="text-white font-bold">
       <div className="flex justify-center mt-16 gap-6">

@@ -6,14 +6,14 @@ const { v4: uuidv4 } = require('uuid')
 /* const bcrypt = require('bcrypt'); */
 
 const userSignUp = async (req, res) => {
-    const { email, password, passwordConfirmation } = req.body;
+    const { username, password, passwordConfirmation } = req.body;
 
 
-    const hasEmail = await Users.findOne({ email });
-    console.log(hasEmail)
+    const hasUsername = await Users.findOne({ username });
+   
 
-    if (hasEmail) {
-        return res.status(400).json({ message: 'Os dados introduzidos não são válidos.', errors: { email: 'O endereço introduzido já está registado.' } });
+    if (hasUsername) {
+        return res.status(400).json({ message: 'Os dados introduzidos não são válidos.', errors: { username: 'O endereço introduzido já está registado.' } });
     }
 
   
@@ -23,7 +23,7 @@ const userSignUp = async (req, res) => {
 
     try {
         console.log(1)
-        const user = await Users.create({ email, password, passwordConfirmation });
+        const user = await Users.create({ username, password, passwordConfirmation });
         res.status(201).json({messsage:"Utilizador criado com sucesso","_id": user._id});
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
@@ -33,34 +33,27 @@ const userSignUp = async (req, res) => {
 
 
 const userLogin = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-   
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ username });
 
-  
     if (!user) {
         return res.status(404).json({ message: 'O utilizador não foi encontrado!' });
     }
 
-    // Compare the passwords
-    /* const isPasswordValid = await bcrypt.compare(password, user.password); Nao esta a funcionar*/
-    const isPasswordValid = password === user.password //nao e seguro
+    const isPasswordValid = password === user.password;
 
-    
     if (!isPasswordValid) {
         return res.status(401).json({ message: 'A password introduzida é inválida!' });
     }
 
-
     const token = uuidv4();
 
-    
     await Session.create({ userId: user._id, token });
 
-  
-    res.status(200).json({ token });
+    res.status(200).json({ _id: user._id, token });
 }
+
 
 
 
@@ -92,8 +85,6 @@ const getUser = async (req, res) => {
 
    
     res.status(200).json({ _id: user._id, email: user.email });
-
-
 }
 
 

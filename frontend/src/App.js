@@ -12,11 +12,8 @@ function App() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const[token, setToken] = useState("")
-  console.log(email);
-  console.log(password);
-  console.log(newEmail);
-  console.log(newPassword)
-  console.log(token);
+  const [userId, setUserId] = useState("")
+  console.log(userId)
 
 
 
@@ -55,6 +52,7 @@ function App() {
               email={email}
               password={password}
               handleToken={handleToken}
+              setUserId={setUserId}
             />
           }
         />
@@ -71,7 +69,7 @@ function App() {
             />
           }
         />
-        <Route path="/layout" element={<Layout />} />
+        <Route path="/layout" element={<Layout userId={userId}/>} />
         
       </Routes>
     </BrowserRouter>

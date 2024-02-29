@@ -14,7 +14,7 @@ export function CreateAccount({email, password, confirmPassword,  onChangePasswo
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password, passwordConfirmation: confirmPassword }),
+        body: JSON.stringify({ username: email, password, passwordConfirmation: confirmPassword }),
       });
 
       if (response.ok) {
@@ -39,7 +39,7 @@ export function CreateAccount({email, password, confirmPassword,  onChangePasswo
       <div className="flex justify-center items-center">
         <form className="pl-4 flex-col">
             <div className="flex-col">
-                <h3 className="text-white ">Email</h3>
+                <h3 className="text-white ">Username</h3>
                 <input className="text-black rounded" type="text" value={email} onChange={onChangeEmail}/>
             </div>
 

@@ -8,7 +8,8 @@ import { Friends } from "../pages/Inner Pages/Friends"
 import { AddPost } from "../pages/Inner Pages/AddPost"
 
 
-export function Layout ({ children })  {
+export function Layout ({userId})  {
+
 
   const [component, setComponent] = useState("home")
   console.log(component)
@@ -16,15 +17,15 @@ export function Layout ({ children })  {
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return <Feed />;
+        return <Feed userId={userId}/>;
       case "add":
-        return <AddPost />;
+        return <AddPost userId={userId}/>;
       case "search":
-        return <Search />;
+        return <Search userId={userId}/>;
       case "friends":
-        return <Friends />;
+        return <Friends userId={userId}/>;
       case "profile":
-        return <Profile />;
+        return <Profile userId={userId}/>;
       default:
         return null;
     }
