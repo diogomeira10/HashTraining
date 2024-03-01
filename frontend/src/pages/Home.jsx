@@ -41,7 +41,7 @@ export function Home({ email, password, onChangeEmail, onChangePassword, handleT
       <div className="flex justify-center items-center">
         <form className="pl-4 flex-col">
             <div className="flex-col">
-                <h3 className="text-white ">Email</h3>
+                <h3 className="text-white ">Username</h3>
                 <input className="text-black rounded" type="text" value={email} onChange={onChangeEmail} />
             </div>
 

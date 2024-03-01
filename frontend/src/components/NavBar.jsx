@@ -32,7 +32,7 @@ export function Navbar({ setComponent }) {
   };
 
   return (
-    <div className="navbar fixed bottom-0 w-full bg-black p-4 shadow-md border-t-2" style={{ borderColor: '#419EF4' }}>
+    <div className="navbar rounded-3xl fixed bottom-0 w-full bg-black p-4 shadow-md border-t-2" style={{ borderColor: '#419EF4' }}>
 
       <nav className="flex justify-around">
         <p
@@ -91,7 +91,7 @@ export function Navbar({ setComponent }) {
             paddingBottom: selectedTab === "add" ? "8px" : "0",
           }}
         >
-          <CgAdd style={{ color: "#419EF4", fontSize: "32px" }} />
+          <CgAdd style={{ color: "#419EF4", fontSize: "24px" }} />
           {selectedTab === "add" && (
             <div
               style={{

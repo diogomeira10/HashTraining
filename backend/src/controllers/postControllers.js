@@ -6,34 +6,39 @@ const mongoose = require("mongoose")
 
 //add Post
 const addPost = async (req, res) => {
+  try {
+    const { content, author, imageUrl } = req.body;
 
-    try {
-   
-      const {content, author, imageUrl } = req.body;
-  
-    
-      const existingUser = await Users.findById(author);
-      if (!existingUser) {
-        return res.status(400).json({ error: "Author not found" });
-      }
-  
-   
-      const newPost = new Post({
-        content,
-        author: existingUser._id,
-        imageUrl
-      });
-  
-  
-      await newPost.save();
-  
-      
-      res.status(201).json(newPost);
-    } catch (error) {
-      console.error("Error adding post:", error);
-      res.status(500).json({ error: "Internal server error" });
+    // Fetch the user object using the author ID
+    const existingUser = await Users.findById(author);
+
+    if (!existingUser) {
+      return res.status(400).json({ error: "Author not found" });
     }
-  };
+
+    // Extract the username from the user object
+    const { username } = existingUser;
+
+    // Create the new post object with the username included
+    const newPost = new Post({
+      content,
+      author: existingUser._id,
+      imageUrl,
+      username
+
+    });
+
+    // Save the new post
+    await newPost.save();
+
+    // Return the new post object with the username included
+    res.status(201).json(newPost);
+  } catch (error) {
+    console.error("Error adding post:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 
   const getPosts = async (req, res) => {
     try {
