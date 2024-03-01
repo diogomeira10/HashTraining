@@ -45,9 +45,7 @@ export function AddPost({ userId }) {
   };
 
   return (
-    <div className="text-white">
-
-
+    <div className="text-white pt-16">
       <div className="flex justify-center mt-20">
         <form className="flex flex-col" onSubmit={handlePostSubmit}>
           <label className="font-bold mb-2">Image Url</label>
@@ -69,7 +67,8 @@ export function AddPost({ userId }) {
           />
 
           <div className="flex justify-center">
-            <button style={{ borderColor: '#419EF4' }} className="mt-5 border-2 rounded-xl w-24 font-bold p-2">Add Post</button>
+          <button className="mt-5 border-2 rounded-xl w-24 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
+
           </div>
         </form>
       </div>

@@ -9,9 +9,9 @@ export function Post({ content, imgUrl, username }) {
 
     return (
         <div>
-            <div className='w-80 h-96'>
+            <div className='w-80 h-96 mb-40'>
                 <div className='flex items-center mb-3'>
-                    <img className='{w-10 h-10 rounded-full' src='https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1}' alt="post_image" />
+                    <img className='{w-10 h-10 rounded-full' src='https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1' alt="post_image" />
                     <div className="ml-3 font-bold">cristiano</div>
                 </div>
                 <div className='max-w-full h-full overflow-hidden'>

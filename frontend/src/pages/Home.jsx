@@ -41,13 +41,13 @@ export function Home({ email, password, onChangeEmail, onChangePassword, handleT
       <div className="flex justify-center items-center">
         <form className="pl-4 flex-col">
             <div className="flex-col">
-                <h3 className="text-white ">Username</h3>
-                <input className="text-black rounded" type="text" value={email} onChange={onChangeEmail} />
+                <h3 className="text-white mb-1 text-xs">Username</h3>
+                <input className="text-white border-2 rounded"  style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }} type="text" value={email} onChange={onChangeEmail} />
             </div>
 
             <div className="mt-8">
-          <h3 className="text-white">Password</h3>
-          <input className="text-black rounded" value={password} onChange={onChangePassword} type="password" />
+          <h3 className="text-white mb-1 text-xs">Password</h3>
+          <input className="text-white border-2 rounded"  style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }} value={password} onChange={onChangePassword} type="password" />
             </div>
         </form>
       </div>
