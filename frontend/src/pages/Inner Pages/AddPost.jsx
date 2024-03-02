@@ -5,8 +5,10 @@ import { LiaPhotoVideoSolid } from "react-icons/lia";
 export function AddPost({ userId }) {
   const [imgUrlInput, setImgUrlInput] = useState("");
   const [content, setContent] = useState("");
+  const [sport,setSport] =useState('')
   console.log(content)
   console.log(imgUrlInput)
+  console.log(sport)
 
   const handleImageUrlChange = (event) => {
     setImgUrlInput(event.target.value);
@@ -16,9 +18,16 @@ export function AddPost({ userId }) {
     setContent(event.target.value);
   };
 
+  const handleSportChange = (event) => {
+    setSport(event.target.value)
+  }
+
   const handlePostSubmit = (e) => {
     e.preventDefault()
     handleAddPost()
+    setImgUrlInput("")
+    setContent("")
+
 
   }
 
@@ -65,10 +74,17 @@ export function AddPost({ userId }) {
             onChange={handleContentChange}
             style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }}
           />
+          <label className="font-bold mb-2 mt-5">Sport</label>
+          <input
+            className="text-white border"
+            type="text"
+            value={sport}
+            onChange={handleSportChange}
+            style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }}
+          />
 
           <div className="flex justify-center">
           <button className="mt-5 border-2 rounded-xl w-24 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
-
           </div>
         </form>
       </div>

@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 export function Profile({userId, username}) {
 
   const [numberOfPosts, setNumberOfPosts] = useState(null)
+  const [posts, setPosts ] = useState([])
   
+  console.log(numberOfPosts)
+  console.log(posts)
+
   useEffect(() => {
     const getNumberOfPosts = async () => {
       try {
@@ -20,9 +24,31 @@ export function Profile({userId, username}) {
         setNumberOfPosts(null);
       }
     };
+
+    const getPostsOfUser = async () => {
+      try {
+        const response = await fetch(`/api/postsOfUser/${username}`)
+        if(!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+        const data = await response.json()
+        setPosts(data.posts)
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setNumberOfPosts(null);
+      }
+    }
+
     getNumberOfPosts();
+    getPostsOfUser()
   }, []);
+
+const renderedPosts = posts.map((post) => {
+    return <img className='w-28 h-28 rounded' src={post.imageUrl} alt='post_image' />
+  }) 
   
+  console.log(renderedPosts)
 
   
 
@@ -53,6 +79,11 @@ export function Profile({userId, username}) {
       <FaBoltLightning style={{color: "yellow"}} />
       <p>Invite to Train</p>
       </div>
+      
+         <div className='flex gap-4 mt-4 ml-3  flex-wrap h-full'>
+      {renderedPosts}
+      </div>
+     
     </div>
   );
 }

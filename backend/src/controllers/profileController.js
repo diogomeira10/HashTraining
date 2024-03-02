@@ -16,9 +16,23 @@ const getNumberOfPostsOfUser = async (req, res) => {
     }
 }
 
+const getPostsOfUser  = async (req,res) => {
+    const { username } = req.params;
+
+    try {
+        const posts = await Posts.find({username})
+        res.status(200).json({posts})
+    } catch {
+        console.error("Error fetching posts:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+
+}
+
 
 
 
 module.exports = {
-    getNumberOfPostsOfUser
+    getNumberOfPostsOfUser,
+    getPostsOfUser
 }

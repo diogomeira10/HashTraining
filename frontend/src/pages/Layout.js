@@ -19,7 +19,7 @@ export function Layout ({userId, username})  {
       case "home":
         return <Feed userId={userId} username={username}/>;
       case "add":
-        return <AddPost userId={userId} />;
+        return <AddPost userId={userId}/>;
       case "search":
         return <Search userId={userId}/>;
       case "friends":

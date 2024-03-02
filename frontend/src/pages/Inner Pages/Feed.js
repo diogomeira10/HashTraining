@@ -5,11 +5,15 @@ export function Feed ({username}) {
 
   const [posts, setPosts ] = useState([])
   const [loading, setLoading] = useState(true);
+  const [sport, setSport ] = useState("sport")
+
 const renderedPosts = posts.map((post) => {
   
-    return <Post content={post.content} imgUrl={post.imageUrl} 
+    return <Post key={post._id} sport={sport} content={post.content} imgUrl={post.imageUrl} 
     username={post.username}/> 
   })
+
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
