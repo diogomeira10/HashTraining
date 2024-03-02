@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { LiaPhotoVideoSolid } from "react-icons/lia";
+import { Input } from "../../components/Input";
 
 
 export function AddPost({ userId }) {
   const [imgUrlInput, setImgUrlInput] = useState("");
   const [content, setContent] = useState("");
-  const [sport,setSport] =useState('')
+  const [sport, setSport] = useState('')
   console.log(content)
   console.log(imgUrlInput)
   console.log(sport)
@@ -58,33 +59,21 @@ export function AddPost({ userId }) {
       <div className="flex justify-center mt-20">
         <form className="flex flex-col" onSubmit={handlePostSubmit}>
           <label className="font-bold mb-2">Image Url</label>
-          <input
-            className="text-white border"
-            type="text"
+          <Input type="text"
             value={imgUrlInput}
-            onChange={handleImageUrlChange}
-            style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }}
-          />
+            onChange={handleImageUrlChange} />
           <br />
           <label className="font-bold mb-2">Description</label>
-          <input
-            className="text-white border"
-            type="text"
+          <Input type="text"
             value={content}
-            onChange={handleContentChange}
-            style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }}
-          />
+            onChange={handleContentChange} />
           <label className="font-bold mb-2 mt-5">Sport</label>
-          <input
-            className="text-white border"
-            type="text"
+          <Input type="text"
             value={sport}
-            onChange={handleSportChange}
-            style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }}
-          />
+            onChange={handleSportChange} />
 
           <div className="flex justify-center">
-          <button className="mt-5 border-2 rounded-xl w-24 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
+            <button className="mt-5 border-2 rounded-xl w-24 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
           </div>
         </form>
       </div>

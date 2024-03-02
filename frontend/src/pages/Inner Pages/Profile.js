@@ -42,7 +42,7 @@ export function Profile({userId, username}) {
 
     getNumberOfPosts();
     getPostsOfUser()
-  }, []);
+  }, [username]);
 
 const renderedPosts = posts.map((post) => {
     return <img className='w-28 h-28 rounded' src={post.imageUrl} alt='post_image' />
