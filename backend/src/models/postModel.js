@@ -23,7 +23,11 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   username: {
-    type: String, //
+    type: String, 
+    required: true
+  },
+  sport: { //added
+    type: String,
     required: true
   }
 },

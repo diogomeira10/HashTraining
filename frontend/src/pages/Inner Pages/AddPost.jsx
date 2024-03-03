@@ -4,12 +4,14 @@ import { Input } from "../../components/Input";
 
 
 export function AddPost({ userId }) {
+
   const [imgUrlInput, setImgUrlInput] = useState("");
   const [content, setContent] = useState("");
   const [sport, setSport] = useState('')
   console.log(content)
   console.log(imgUrlInput)
   console.log(sport)
+  console.log(userId)
 
   const handleImageUrlChange = (event) => {
     setImgUrlInput(event.target.value);
@@ -28,6 +30,7 @@ export function AddPost({ userId }) {
     handleAddPost()
     setImgUrlInput("")
     setContent("")
+    setSport("")
 
 
   }
@@ -40,7 +43,7 @@ export function AddPost({ userId }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content, author: userId, imageUrl: imgUrlInput }),
+        body: JSON.stringify({ content, author: userId, imageUrl: imgUrlInput, sport }),
       });
 
       if (!response.ok) {

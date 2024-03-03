@@ -7,7 +7,7 @@ const mongoose = require("mongoose")
 //add Post
 const addPost = async (req, res) => {
   try {
-    const { content, author, imageUrl } = req.body;
+    const { content, author, imageUrl , sport } = req.body;
 
     // Fetch the user object using the author ID
     const existingUser = await Users.findById(author);
@@ -24,7 +24,8 @@ const addPost = async (req, res) => {
       content,
       author: existingUser._id,
       imageUrl,
-      username
+      username, 
+      sport
 
     });
 
