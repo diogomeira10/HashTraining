@@ -8,7 +8,7 @@ import { useState } from "react";
 export function Navbar({ setComponent }) {
   //NavBar SelectedAnimation
   const [selectedTab, setSelectedTab] = useState("home");
-  console.log(selectedTab);
+
 
   const handleHomeSelect = () => {
     setSelectedTab("home");

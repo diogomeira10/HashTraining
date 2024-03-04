@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { Post } from "../../components/Post";
 
-export function Feed ({username}) {
+export function Feed ({showProfile, setUsername, userLogedIn}) {
 
   const [posts, setPosts ] = useState([])
   const [loading, setLoading] = useState(true);
@@ -9,11 +9,14 @@ export function Feed ({username}) {
 const renderedPosts = posts.map((post) => {
   
     return <Post 
+    showProfile={showProfile}
+    setUsername={setUsername}
     key={post._id} 
     sport={post.sport} 
     content={post.content} 
     imgUrl={post.imageUrl} 
     username={post.username}
+    userLogedIn={userLogedIn}
     /> 
   })
 
@@ -26,7 +29,6 @@ const renderedPosts = posts.map((post) => {
           throw new Error("Failed to fetch posts");
         }
         const data = await response.json();
-        console.log(data)
         setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -37,12 +39,6 @@ const renderedPosts = posts.map((post) => {
 
     fetchPosts();
   }, []);
-
-
-  
-
-
-      console.log(posts)
    
 
     return <div className="pt-16 pb-10 text-white mt-5 flex flex-col justify-center items-center">

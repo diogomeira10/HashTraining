@@ -8,7 +8,7 @@ import { Friends } from "./Inner Pages/Friends"
 import { AddPost } from "./Inner Pages/AddPost"
 
 
-export function Layout ({userId, username})  {
+export function Layout ({userId, username, userLogedIn})  {
 
   const [component, setComponent] = useState("home")
   const [showProfile, setShowProfile] = useState(false)
@@ -31,13 +31,11 @@ export function Layout ({userId, username})  {
   }
 
 
-  console.log(component)
-
 
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return <Feed userId={userId} username={username}/>;
+        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
       case "add":
         return <AddPost userId={userId} />;
       case "search":
@@ -45,7 +43,7 @@ export function Layout ({userId, username})  {
       case "friends":
         return <Friends userId={userId}/>;
       case "profile":
-        return <Profile userId={userId} username={username}/>;
+        return <Profile userId={userId} username={username} userLogedIn={userLogedIn}/>;
       default:
         return null;
     }
@@ -56,7 +54,6 @@ export function Layout ({userId, username})  {
       <div className="">
         <div className="">
         <Header />
-
         </div>
         {<main>{renderComponent()}</main>}
         <Navbar setComponent={setComponent}/>

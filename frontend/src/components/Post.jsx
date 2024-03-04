@@ -18,8 +18,7 @@ import { PiPlugBold } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa6";
 
 
-export function Post({ content, imgUrl, username, sport}) {
-    console.log(sport)
+export function Post({ content, imgUrl, username, sport, showProfile, setUsername}) {
 
     const getSportIcon = (sport) => {
         switch (sport.toLowerCase()) {
@@ -50,13 +49,18 @@ export function Post({ content, imgUrl, username, sport}) {
         }
     };
 
+    const handleUserClick = () => {
+        showProfile()
+        setUsername(username)
+    }
+
 
 
     return (
         <div>
             <div className='w-80 h-96 mb-40'>
-                
-                    <div className='flex justify-between items-center mb-3'>
+            
+                    <div onClick={handleUserClick} className='flex justify-between items-center mb-3'>
                         <div className='flex items-center'>
                         <img className='{w-10 h-10 rounded-full' src='https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1' alt="post_image" />
                         <div className="ml-3 font-bold">{username}</div>
