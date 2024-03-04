@@ -11,6 +11,26 @@ import { AddPost } from "./Inner Pages/AddPost"
 export function Layout ({userId, username})  {
 
   const [component, setComponent] = useState("home")
+  const [showProfile, setShowProfile] = useState(false)
+  const [selectedUsername, setSelectedUsername] = useState(null);
+ 
+
+  console.log(selectedUsername)
+  console.log(showProfile)
+
+  const handleUsernameChange = (username) => {
+    setSelectedUsername(username)
+  }
+
+  const handleShowProfile = () => {
+    setShowProfile(true)
+  }
+
+  const goBack = () => {
+    setShowProfile(false)
+  }
+
+
   console.log(component)
 
 
@@ -19,9 +39,9 @@ export function Layout ({userId, username})  {
       case "home":
         return <Feed userId={userId} username={username}/>;
       case "add":
-        return <AddPost userId={userId}/>;
+        return <AddPost userId={userId} />;
       case "search":
-        return <Search userId={userId}/>;
+        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
       case "friends":
         return <Friends userId={userId}/>;
       case "profile":

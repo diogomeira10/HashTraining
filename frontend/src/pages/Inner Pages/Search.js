@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Input } from "../../components/Input";
 import { BsSearch } from "react-icons/bs";
 
-export function Search() {
+export function Search({showProfile, username, setUsername}) {
     const [term, setTerm] = useState("");
     const [listOfUsers, setListOfUsers] = useState(null);
+
 
     useEffect(() => {
         const getAllUsers = async () => {
@@ -23,6 +24,12 @@ export function Search() {
         getAllUsers();
     }, []);
 
+    const handleUserClick = (username) => {
+        setUsername(username);
+        showProfile()
+       
+      };
+
     const handleTermChange = (e) => {
         setTerm(e.target.value);
     };
@@ -39,10 +46,12 @@ export function Search() {
             style={{ backgroundColor: "#333553", borderRadius: "5px", borderColor: "#419EF4" }}
             className="border flex justify-center items-center h-10"
             key={user._id}
+            onClick={() => handleUserClick(user.username)}
         >
             {user.username}
         </div>
     ));
+
 
     return (
         <div className="mt-32 relative">

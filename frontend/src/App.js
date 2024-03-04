@@ -69,7 +69,7 @@ function App() {
             />
           }
         />
-        <Route path="/layout" element={<Layout userId={userId} username={email}/>} />
+        <Route path="/layout" element={<Layout userId={userId} username={email} userLogedIn={email}/>} />
         
       </Routes>
     </BrowserRouter>

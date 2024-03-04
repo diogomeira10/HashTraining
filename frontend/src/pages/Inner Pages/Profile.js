@@ -1,8 +1,10 @@
 import { FaBoltLightning } from "react-icons/fa6";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 
 import { useState, useEffect } from "react";
 
-export function Profile({userId, username}) {
+export function Profile({username, goBack, userLogedIn}) {
 
   const [numberOfPosts, setNumberOfPosts] = useState(null)
   const [posts, setPosts ] = useState([])
@@ -50,10 +52,13 @@ const renderedPosts = posts.map((post) => {
   
   console.log(renderedPosts)
 
-  
 
   return (
     <div className="text-white pt-16 font-bold">
+      <div className='absolute text-3xl left-4' onClick={goBack}> 
+      <IoMdArrowRoundBack />
+      </div>
+
       <div className="flex justify-center mt-16 gap-6">
         <div className="flex-col w-20">
           <img className="rounded-full" src="https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1" alt="user_img" />
@@ -75,9 +80,9 @@ const renderedPosts = posts.map((post) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-around mt-14 border-b-2 border-blue-400 pb-4">
+      <div className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
       <FaBoltLightning style={{color: "yellow"}} />
-      <p>Invite to Train</p>
+      
       </div>
       
          <div className='flex gap-4 mt-4 ml-3  flex-wrap h-full'>

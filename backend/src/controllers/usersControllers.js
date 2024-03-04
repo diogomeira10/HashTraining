@@ -56,7 +56,6 @@ const userLogin = async (req, res) => {
 
 
 
-
 const getUser = async (req, res) => {
    
     const token = req.headers.authorization;
