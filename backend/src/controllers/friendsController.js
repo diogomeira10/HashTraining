@@ -1,10 +1,10 @@
 const Friend = require('../models/friendModel');
 
 const addFriendShip = async (req,res) => {
-    const {user1Id, user2Id} = req.body
+    const {user1, user2} = req.body
 
     try {
-        const friendship = await Friend.create({ user: user1Id, friend: user2Id });
+        const friendship = await Friend.create({ user: user1, friend: user2 });
         res.status(200).json(friendship);
       } catch (error) {
         console.error('Error adding friendship:', error);

@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid')
 /* const bcrypt = require('bcrypt'); */
 
 const userSignUp = async (req, res) => {
-    const { username, password, passwordConfirmation } = req.body;
+    const { username, password, passwordConfirmation, profileImage} = req.body;
 
 
     const hasUsername = await Users.findOne({ username });
@@ -23,7 +23,7 @@ const userSignUp = async (req, res) => {
 
     try {
         console.log(1)
-        const user = await Users.create({ username, password, passwordConfirmation });
+        const user = await Users.create({ username, password, passwordConfirmation, profileImage});
         res.status(201).json({messsage:"Utilizador criado com sucesso","_id": user._id});
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });

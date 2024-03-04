@@ -31,11 +31,10 @@ export function Layout ({userId, username, userLogedIn})  {
   }
 
 
-
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
+        return showProfile ? <Profile  goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
       case "add":
         return <AddPost userId={userId} />;
       case "search":
@@ -49,7 +48,7 @@ export function Layout ({userId, username, userLogedIn})  {
     }
   };
 
-
+  
     return (
       <div className="">
         <div className="">

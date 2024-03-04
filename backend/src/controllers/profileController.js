@@ -29,10 +29,27 @@ const getPostsOfUser  = async (req,res) => {
 
 }
 
+const getUserProfileImage = async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = await Users.findOne({ username });
+        if (user) {
+            const profileImage = user.profileImage;
+            res.status(200).json({ profileImage });
+        } else {
+            res.status(404).json({ error: "User not found" });
+        }
+    } catch (error) {
+        console.error("Error fetching user profile image:", error);
+        
+    }
+}
 
 
 
 module.exports = {
     getNumberOfPostsOfUser,
-    getPostsOfUser
+    getPostsOfUser,
+    getUserProfileImage
 }

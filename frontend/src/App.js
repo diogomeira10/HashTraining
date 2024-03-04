@@ -11,6 +11,7 @@ function App() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [imageProfile,setImageProfile] = useState("")
   const[token, setToken] = useState("")
   const [userId, setUserId] = useState("")
   console.log(userId)
@@ -34,6 +35,9 @@ function App() {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
+  const handleImageProfileChange = (e) => {
+    setImageProfile(e.target.value)
+  }
 
 
   const handleToken = (token) => {
@@ -66,6 +70,8 @@ function App() {
               onChangeEmail={handleNewEmailChange}
               onChangePassword={handleNewPasswordChange}
               onChangeConfirmPassword={handleConfirmPasswordChange}
+              imageProfile={imageProfile}
+              onChangeImageProfile={handleImageProfileChange}
             />
           }
         />

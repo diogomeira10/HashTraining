@@ -11,6 +11,11 @@ export function Profile({username, goBack, userLogedIn}) {
   const [numberOfPosts, setNumberOfPosts] = useState(null)
   const [posts, setPosts ] = useState([])
   const [showIcon, setShowIcon] = useState(false); 
+  const [profileImage, setProfileImage] = useState(null)
+
+  console.log(profileImage)
+
+
 
 
 
@@ -44,6 +49,21 @@ export function Profile({username, goBack, userLogedIn}) {
       }
     }
 
+    const getProfileImage = async () => {
+      try {
+        const response = await fetch(`/api/profilePicture/${username}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch number of posts');
+        }
+        const data = await response.json();
+        setProfileImage(data.profileImage);
+      } catch (error) {
+        console.error('Error fetching number of posts:', error);
+        setProfileImage(null);
+      }
+    };
+
+    getProfileImage()
     getNumberOfPosts();
     getPostsOfUser()
   }, [username]);
@@ -56,6 +76,30 @@ export function Profile({username, goBack, userLogedIn}) {
 const renderedPosts = posts.map((post) => {
     return <img className='w-28 h-28 rounded' src={post.imageUrl} alt='post_image' />
   }) 
+
+
+  const addFriendShip = async () => {
+    try {
+      const response = await fetch('/api/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userLogedIn, username }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error adding friendship');
+      }
+  
+      const friendship = await response.json();
+      console.log('Friendship added:', friendship);
+      return friendship;
+    } catch (error) {
+      console.error('Error adding friendship:', error.message);
+      throw error;
+    }
+  }
 
 
 
@@ -95,7 +139,6 @@ const renderedPosts = posts.map((post) => {
           <FaBoltLightning style={{color: "yellow"}} />
         </div>
       )}
-      
       </div>
       
          <div className='flex gap-4 mt-4 ml-3  flex-wrap h-full'>

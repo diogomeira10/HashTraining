@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 
 
-export function CreateAccount({email, password, confirmPassword,  onChangePassword, onChangeEmail, onChangeConfirmPassword}) {
+export function CreateAccount({email, password, confirmPassword,  onChangePassword, onChangeEmail, onChangeConfirmPassword, imageProfile, onChangeImageProfile}) {
 
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ export function CreateAccount({email, password, confirmPassword,  onChangePasswo
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: email, password, passwordConfirmation: confirmPassword }),
+        body: JSON.stringify({ username: email, password, passwordConfirmation: confirmPassword, profileImage: imageProfile}),
       });
 
       if (response.ok) {
@@ -52,12 +52,19 @@ export function CreateAccount({email, password, confirmPassword,  onChangePasswo
           <h3 className="text-white">Verify password</h3>
           <input type="password" className="text-black rounded" value={confirmPassword} onChange={onChangeConfirmPassword}/>
             </div>
+
+            <div className="mt-8">
+          <h3 className="text-white">Profile Image</h3>
+          <input type="text" className="text-black rounded" value={imageProfile} onChange={onChangeImageProfile}/>
+            </div>
         </form>
       </div>
       <div className="mt-6">
         <div>
           <button onClick={handleAccountCreate} className="font-bold">Create Account</button>
         </div>
+
+
         <Link to="/">
             <p className="font-bold">Login</p>
         </Link>
