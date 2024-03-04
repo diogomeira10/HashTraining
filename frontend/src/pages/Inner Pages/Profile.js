@@ -13,10 +13,9 @@ export function Profile({username, goBack, userLogedIn}) {
   const [showIcon, setShowIcon] = useState(false); 
   const [profileImage, setProfileImage] = useState(null)
 
+  
   console.log(profileImage)
-
-
-
+  console.log(username)
 
 
   useEffect(() => {
@@ -115,7 +114,7 @@ const renderedPosts = posts.map((post) => {
       <div className="flex justify-around mt-16 gap-6">
 
           <div className="flex-col w-20">
-            <img className="rounded-full" src="https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1" alt="user_img" />
+            <img className="rounded-full" src={profileImage} alt="user_img" />
             <p>{username}</p>
           </div>
 

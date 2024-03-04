@@ -17,8 +17,32 @@ import { FaRegHeart } from "react-icons/fa";
 import { PiPlugBold } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa6";
 
+import { useEffect, useState } from "react";
+
 
 export function Post({ content, imgUrl, username, sport, showProfile, setUsername}) {
+
+    const [profileImage, setProfileImage] = useState(null)
+
+
+    useEffect(() => {
+        const getProfileImage = async () => {
+          try {
+            const response = await fetch(`/api/profilePicture/${username}`);
+            if (!response.ok) {
+              throw new Error('Failed to fetch number of posts');
+            }
+            const data = await response.json();
+            setProfileImage(data.profileImage);
+          } catch (error) {
+            console.error('Error fetching number of posts:', error);
+            setProfileImage(null);
+          }
+        };
+    
+        getProfileImage()
+      })
+    
 
     const getSportIcon = (sport) => {
         switch (sport.toLowerCase()) {
@@ -62,7 +86,7 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
             
                     <div onClick={handleUserClick} className='flex justify-between items-center mb-3'>
                         <div className='flex items-center'>
-                        <img className='{w-10 h-10 rounded-full' src='https://ekcfbmsotzc.exactdn.com/en/blog/wp-content/uploads/2021/08/Soccer-Cristiano-Ronaldo.png?strip=all&lossy=1&ssl=1' alt="post_image" />
+                        <img className='{w-10 h-10 rounded-full' src={profileImage} alt="post_image" />
                         <div className="ml-3 font-bold">{username}</div>
                         </div>
                         <div className='text-2xl'>{getSportIcon(sport)}</div>

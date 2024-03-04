@@ -1,6 +1,6 @@
 import { Header } from "../components/Header";
 import { Navbar } from "../components/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Feed } from "./Inner Pages/Feed"
 import { Profile } from "./Inner Pages/Profile"
 import { Search } from "./Inner Pages/Search"
@@ -8,11 +8,15 @@ import { Friends } from "./Inner Pages/Friends"
 import { AddPost } from "./Inner Pages/AddPost"
 
 
+
 export function Layout ({userId, username, userLogedIn})  {
+
 
   const [component, setComponent] = useState("home")
   const [showProfile, setShowProfile] = useState(false)
-  const [selectedUsername, setSelectedUsername] = useState(null);
+  const [selectedUsername, setSelectedUsername] = useState('');
+
+
  
 
   console.log(selectedUsername)
