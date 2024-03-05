@@ -20,14 +20,9 @@ export function Comments({ posts, closeComments}) {
 
 
 
-    return <div className='border w-full h-screen relative'>
-    <div className='flex justify-center'>
-        <div onClick={closeComments} className='text-xl absolute left-5'><IoMdArrowRoundBack /></div>
-        <div>Comments</div>
-    </div>
-    <form className='flex absolute bottom-44 left-0 right-0' onSubmit={handleSubmit}>
+    return <div className='w-full relative'>
+    <form className='flex bottom-44 left-0 right-0 mb-5' onSubmit={handleSubmit}>
         <Input className='w-full' type='text' value={comment} onChange={handleCommentChange} />
-
         <div className='absolute right-2 top-1'>
         <IoSend />
         </div>

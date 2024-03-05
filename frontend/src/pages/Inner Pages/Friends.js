@@ -20,7 +20,7 @@ export function Friends ({userId, userLogedIn}) {
               setConnectionsList(data)
             } catch (error) {
               console.error('Error fetching number of posts', error);
-              setConnectionsList(null);
+              setConnectionsList([]);
             }
           }
 
