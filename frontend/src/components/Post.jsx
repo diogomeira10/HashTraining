@@ -30,12 +30,30 @@ import { useEffect, useState } from "react";
 import { Comments } from './Comments';
 
 
-export function Post({ content, imgUrl, username, sport, showProfile, setUsername }) {
+
+
+export function Post({ content, imgUrl, username, sport, showProfile, setUsername, postId }) {
+
+ 
 
     const [profileImage, setProfileImage] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
     const [isConnected, setIsConnected] = useState(false);
     const [showComments, setShowComments] = useState(false)
+    console.log(showComments)
+
+
+
+    const handleOpenComments = () => {
+        setShowComments(!showComments)
+    }
+
+    const handleCloseComments = () => {
+        setShowComments(false)
+    }
+
+
+
 
     const handleHeartClick = () => {
         setIsLiked(!isLiked)
@@ -126,16 +144,21 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                         {isConnected ? (
                             <PiPlugsConnectedBold className={`text-xl text-yellow-500 ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick} />
                         ) : (
-                            <div className={`lightning text-xl ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick}><PiPlugsBold  /></div>
+                            <div className={`lightning text-xl ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick}><PiPlugsBold /></div>
                         )}
                     </div>
+                    <div onClick={handleOpenComments}>
                     <FaRegComment className="text-xl" />
+
+                    </div>
                 </div>
                 <div className='flex gap-5 ml-2 mt-2'>
                     <p className='font-bold'>{username}</p>
                     <p className="font-thin mt-1 text-xs">{content}</p>
                 </div>
             </div>
+            {showComments && <Comments closeComments={handleCloseComments}/>}
+            
         </div>
     )
 }

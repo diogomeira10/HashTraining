@@ -5,6 +5,7 @@ export function Feed ({showProfile, setUsername, userLogedIn, filterSport}) {
 
   const [posts, setPosts ] = useState([])
   const [loading, setLoading] = useState(true);
+  
 
   const renderedPosts = posts
   .filter((post) => {
@@ -24,6 +25,7 @@ export function Feed ({showProfile, setUsername, userLogedIn, filterSport}) {
       imgUrl={post.imageUrl}
       username={post.username}
       userLogedIn={userLogedIn}
+      postId={post._id}
     />
   ))
   .reverse();

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { Input } from "./Input"
 
 
-export function Comments({ posts }) {
+export function Comments({ posts, closeComments}) {
 
     const [comment, setComment] = useState('')
 
@@ -22,7 +22,7 @@ export function Comments({ posts }) {
 
     return <div className='border w-full h-screen relative'>
     <div className='flex justify-center'>
-        <div className='text-xl absolute left-5'><IoMdArrowRoundBack /></div>
+        <div onClick={closeComments} className='text-xl absolute left-5'><IoMdArrowRoundBack /></div>
         <div>Comments</div>
     </div>
     <form className='flex absolute bottom-44 left-0 right-0' onSubmit={handleSubmit}>
