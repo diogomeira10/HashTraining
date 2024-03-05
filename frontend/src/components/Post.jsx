@@ -1,3 +1,6 @@
+import '../heart.css'
+import '../lightning.css'
+
 //Sports Icons
 import { IoMdFootball } from "react-icons/io"; //futebol
 import { FaFootballBall } from "react-icons/fa"; //raguebi
@@ -14,35 +17,52 @@ import { FaVolleyballBall } from "react-icons/fa"; //VolleyballBall
 
 //Profile icons
 import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import { PiPlugBold } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa6";
+
+
+//plugs
+import { PiPlugsBold } from "react-icons/pi";
+import { PiPlugsConnectedBold } from "react-icons/pi";
+
+
 
 import { useEffect, useState } from "react";
 
 
-export function Post({ content, imgUrl, username, sport, showProfile, setUsername}) {
+export function Post({ content, imgUrl, username, sport, showProfile, setUsername }) {
 
     const [profileImage, setProfileImage] = useState(null)
+    const [isLiked, setIsLiked] = useState(false)
+    const [isConnected, setIsConnected] = useState(false);
 
+    const handleHeartClick = () => {
+        setIsLiked(!isLiked)
+    }
+
+    const handleLightningClick = () => {
+        setIsConnected(!isConnected);
+    };
 
     useEffect(() => {
         const getProfileImage = async () => {
-          try {
-            const response = await fetch(`/api/profilePicture/${username}`);
-            if (!response.ok) {
-              throw new Error('Failed to fetch number of posts');
+            try {
+                const response = await fetch(`/api/profilePicture/${username}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch number of posts');
+                }
+                const data = await response.json();
+                setProfileImage(data.profileImage);
+            } catch (error) {
+                console.error('Error fetching number of posts:', error);
+                setProfileImage(null);
             }
-            const data = await response.json();
-            setProfileImage(data.profileImage);
-          } catch (error) {
-            console.error('Error fetching number of posts:', error);
-            setProfileImage(null);
-          }
         };
-    
+
         getProfileImage()
-      })
-    
+    })
+
 
     const getSportIcon = (sport) => {
         switch (sport.toLowerCase()) {
@@ -83,22 +103,32 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
     return (
         <div>
             <div className='w-80 h-96 mb-40'>
-            
-                    <div onClick={handleUserClick} className='flex justify-between items-center mb-3'>
-                        <div className='flex items-center'>
+
+                <div onClick={handleUserClick} className='flex justify-between items-center mb-3'>
+                    <div className='flex items-center'>
                         <img className='{w-10 h-10 rounded-full' src={profileImage} alt="post_image" />
                         <div className="ml-3 font-bold">{username}</div>
-                        </div>
-                        <div className='text-2xl'>{getSportIcon(sport)}</div>
                     </div>
-                    
-               
+                    <div className='text-2xl'>{getSportIcon(sport)}</div>
+                </div>
+
+
                 <div className='max-w-full h-full overflow-hidden'>
                     <img className='w-full h-full object-cover rounded-xl' src={imgUrl} alt='post_image' />
                 </div>
                 <div className='flex gap-3 mt-2 ml-2'>
-                    <FaRegHeart className="text-xl" />
-                    <PiPlugBold className="text-xl" />
+                    <div className="heart-container " onClick={handleHeartClick}>
+                        <div className={`heart-icon ${isLiked ? 'liked' : ''}`}>
+                            {isLiked ? <FaHeart className="text-xl" style={{ color: '#419EF4' }} /> : <FaRegHeart className="text-xl" />}
+                        </div>
+                    </div>
+                    <div className="lightning-container">
+                        {isConnected ? (
+                            <PiPlugsConnectedBold className={`text-xl text-yellow-500 ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick} />
+                        ) : (
+                            <div className={`lightning text-xl ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick}><PiPlugsBold  /></div>
+                        )}
+                    </div>
                     <FaRegComment className="text-xl" />
                 </div>
                 <div className='flex gap-5 ml-2 mt-2'>

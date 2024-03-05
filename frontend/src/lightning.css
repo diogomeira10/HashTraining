@@ -1,0 +1,31 @@
+.lightning-container {
+  position: relative;
+  display: inline-block;
+}
+
+.lightning-icon {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.lightning-icon svg {
+  transition: fill 0.3s ease-in-out;
+}
+
+.lightning-icon.connected {
+  animation: pulse 0.5s ease-in-out;
+  transform: scale(1.25);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

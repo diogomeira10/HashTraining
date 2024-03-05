@@ -1,0 +1,36 @@
+.heart-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .heart-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .heart-icon svg {
+    transition: fill 0.3s ease-in-out;
+  }
+  
+  .heart-icon.liked {
+    animation: pulse 0.5s ease-in-out;
+    transform: scale(1.25);
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+  
+  

@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 import { useState, useEffect } from "react";
 
-export function Profile({username, goBack, userLogedIn}) {
+export function Profile({username, goBack, userLogedIn, showLightning}) {
 
   console.log(userLogedIn)
 
@@ -12,10 +12,15 @@ export function Profile({username, goBack, userLogedIn}) {
   const [posts, setPosts ] = useState([])
   const [showIcon, setShowIcon] = useState(false); 
   const [profileImage, setProfileImage] = useState(null)
+  const [connections, setConnections] = useState(null)
+  
 
   
-  console.log(profileImage)
+ /*  console.log(profileImage)
   console.log(username)
+  console.log(userLogedIn) */
+  console.log(connections)
+ /*  console.log(connectionsList) */
 
 
   useEffect(() => {
@@ -62,13 +67,29 @@ export function Profile({username, goBack, userLogedIn}) {
       }
     };
 
+
+    const getUserFriends = async () => {
+      try{
+        const response = await fetch(`/api/friends/${username}`)
+        if(!response.ok) {
+          throw new Error('Failed to fetch user friends');
+        }
+        const data = await response.json()
+        setConnections(data.length)
+        /* setConnectionsList(data) */
+      } catch (error) {
+        console.error('Error fetching number of posts', error);
+        setConnections(null);
+      }
+    }
+
     getProfileImage()
     getNumberOfPosts();
     getPostsOfUser()
+    getUserFriends()
   }, [username]);
 
   useEffect(() => {
-    // Check if the profile being viewed is not the logged-in user's profile
     setShowIcon(username !== userLogedIn);
   }, [username, userLogedIn]);
 
@@ -79,15 +100,16 @@ const renderedPosts = posts.map((post) => {
 
   const addFriendShip = async () => {
     try {
-      const response = await fetch('/api/add', {
+      const response = await fetch('/api/addFriend', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userLogedIn, username }),
+        body: JSON.stringify({ user1: userLogedIn, user2: username }),
       });
   
       if (!response.ok) {
+        console.log(response)
         throw new Error('Error adding friendship');
       }
   
@@ -98,6 +120,10 @@ const renderedPosts = posts.map((post) => {
       console.error('Error adding friendship:', error.message);
       throw error;
     }
+  }
+
+  const handleLightningClick = () => {
+    addFriendShip()
   }
 
 
@@ -122,7 +148,7 @@ const renderedPosts = posts.map((post) => {
             <div className="flex-col">
               <div className="flex justify-around gap-5">
                 <p>{numberOfPosts}</p>
-                <p>135</p>
+                <p>{connections}</p>
                 
               </div>
               <div className="flex justify-around gap-5">
@@ -134,13 +160,12 @@ const renderedPosts = posts.map((post) => {
       </div>
       <div className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
       {showIcon && (
-        <div className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
+        <div onClick={handleLightningClick} className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
           <FaBoltLightning style={{color: "yellow"}} />
         </div>
       )}
       </div>
-      
-         <div className='flex gap-4 mt-4 ml-3  flex-wrap h-full'>
+         <div className='flex gap-4 mt-4 ml-3 flex-wrap h-full'>
       {renderedPosts}
       </div>
      
