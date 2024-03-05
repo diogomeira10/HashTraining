@@ -16,11 +16,11 @@ export function Profile({username, goBack, userLogedIn, showLightning}) {
   
 
   
- /*  console.log(profileImage)
-  console.log(username)
-  console.log(userLogedIn) */
-  console.log(connections)
- /*  console.log(connectionsList) */
+  // console.log(profileImage)
+  // console.log(username)
+  // console.log(userLogedIn)
+  // console.log(connections) 
+  //  console.log(connectionsList)
 
 
   useEffect(() => {

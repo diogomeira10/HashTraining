@@ -1,4 +1,5 @@
 import { useState, useEffect} from "react"
+import { Comments } from "../../components/Comments"
 
 import { FriendCard } from "../../components/FriendCard"
 
@@ -37,9 +38,9 @@ export function Friends ({userId, userLogedIn}) {
 
         return <FriendCard friend={friend} />
     })
-/*     style={{ backgroundColor: '#333553', borderColor: '#419EF4',  height: '100vh' }}
- */
-    return <div className="text-white flex flex-col items-center mt-28 h-full">
+
+    return <div className="text-white flex flex-col items-center mt-28 h-full"> 
+    
     <div style={{ color: '#419EF4'}} className='mb-12 font-bold text-2xl'>#Connections</div>
     <div style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 200px)',backgroundColor: '#333553', borderColor: '#419EF4',  height: '100vh' }} className='flex justify-center border w-4/5 p-8 rounded '>
         {renderedFriends}

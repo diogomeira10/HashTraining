@@ -1,5 +1,4 @@
 import '../heart.css'
-import '../lightning.css'
 
 //Sports Icons
 import { IoMdFootball } from "react-icons/io"; //futebol
@@ -28,6 +27,7 @@ import { PiPlugsConnectedBold } from "react-icons/pi";
 
 
 import { useEffect, useState } from "react";
+import { Comments } from './Comments';
 
 
 export function Post({ content, imgUrl, username, sport, showProfile, setUsername }) {
@@ -35,6 +35,7 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
     const [profileImage, setProfileImage] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
     const [isConnected, setIsConnected] = useState(false);
+    const [showComments, setShowComments] = useState(false)
 
     const handleHeartClick = () => {
         setIsLiked(!isLiked)

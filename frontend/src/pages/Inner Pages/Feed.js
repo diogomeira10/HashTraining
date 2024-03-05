@@ -1,24 +1,32 @@
 import { useState, useEffect } from "react"
 import { Post } from "../../components/Post";
 
-export function Feed ({showProfile, setUsername, userLogedIn}) {
+export function Feed ({showProfile, setUsername, userLogedIn, filterSport}) {
 
   const [posts, setPosts ] = useState([])
   const [loading, setLoading] = useState(true);
 
-const renderedPosts = posts.map((post) => {
-  
-    return <Post 
-    showProfile={showProfile}
-    setUsername={setUsername}
-    key={post._id} 
-    sport={post.sport} 
-    content={post.content} 
-    imgUrl={post.imageUrl} 
-    username={post.username}
-    userLogedIn={userLogedIn}
-    /> 
+  const renderedPosts = posts
+  .filter((post) => {
+    if (filterSport === 'all of them') {
+      return true; // Show all posts
+    } else {
+      return post.sport === filterSport; // Filter posts based on selected sport
+    }
   })
+  .map((post) => (
+    <Post
+      showProfile={showProfile}
+      setUsername={setUsername}
+      key={post._id}
+      sport={post.sport}
+      content={post.content}
+      imgUrl={post.imageUrl}
+      username={post.username}
+      userLogedIn={userLogedIn}
+    />
+  ))
+  .reverse();
 
 
   useEffect(() => {

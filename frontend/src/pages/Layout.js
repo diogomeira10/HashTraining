@@ -18,7 +18,7 @@ export function Layout({ userId, username, userLogedIn }) {
 
 
   //FILTER POSTS LOGIC AND STATE
-  const [filterSport, setFilterSport] = useState('')
+  const [filterSport, setFilterSport] = useState('all of them')
   console.log(filterSport)
 
   const handleSportSelect = (sport) => {
@@ -50,7 +50,7 @@ export function Layout({ userId, username, userLogedIn }) {
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return showProfile ? <Profile /* userLogedIn={userLogedIn} */ goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
+        return showProfile ? <Profile /* userLogedIn={userLogedIn} */ goBack={goBack} username={selectedUsername} /> : <Feed filterSport={filterSport} userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
       case "add":
         return <AddPost userId={userId} />;
       case "search":

@@ -1,4 +1,14 @@
+import { useNavigate } from 'react-router-dom';
+
 export function FilterMenu ({onSportSelect ,closeBurgerMenu}) {
+
+
+    const navigate = useNavigate()
+
+
+    const handleLogout = () => {
+        navigate('/')
+    }
 
 
     const handleSportClick = (sport) => {
@@ -7,7 +17,7 @@ export function FilterMenu ({onSportSelect ,closeBurgerMenu}) {
     }
     
 
-    const sports = ['footbal','rugby','tennis','basketball','swimming','boxing','surfing','skateboarding','snowboarding','cycling','volleyball']
+    const sports = ['all of them','football','rugby','tennis','basketball','swimming','boxing','surfing','skateboarding','snowboarding','cycling','volleyball']
 
     const renderedSports = sports.map((sport) => {
         return <div onClick={() => handleSportClick(sport)}><span className='text-blue'>#</span>{sport}</div>
@@ -20,6 +30,11 @@ export function FilterMenu ({onSportSelect ,closeBurgerMenu}) {
         <div className='text-white mb-5 text-lg'><span className='text-blue'>#</span>Choose a sport</div>
         <div>
             {renderedSports}
+        </div>
+        <div className='flex justify-end mt-64'>
+        <div onClick={handleLogout} className="inline-block px-4 py-1 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-600 cursor-pointer">
+  Logout
+</div>
         </div>
     </div>
 
