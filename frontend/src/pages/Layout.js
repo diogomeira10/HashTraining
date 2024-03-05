@@ -9,20 +9,30 @@ import { AddPost } from "./Inner Pages/AddPost"
 
 
 
-export function Layout ({userId, username, userLogedIn})  {
-
-  const showLightning = true
-
+export function Layout({ userId, username, userLogedIn }) {
 
   const [component, setComponent] = useState("home")
   const [showProfile, setShowProfile] = useState(false)
   const [selectedUsername, setSelectedUsername] = useState('');
 
 
- 
 
-  console.log(selectedUsername)
-  console.log(showProfile)
+  //FILTER POSTS LOGIC AND STATE
+  const [filterSport, setFilterSport] = useState('')
+  console.log(filterSport)
+
+  const handleSportSelect = (sport) => {
+    setFilterSport(sport)
+  }
+
+
+
+  //---------------------------
+
+
+
+
+
 
   const handleUsernameChange = (username) => {
     setSelectedUsername(username)
@@ -40,28 +50,28 @@ export function Layout ({userId, username, userLogedIn})  {
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return showProfile ? <Profile /* userLogedIn={userLogedIn} */  goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
+        return showProfile ? <Profile /* userLogedIn={userLogedIn} */ goBack={goBack} username={selectedUsername} /> : <Feed userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
       case "add":
         return <AddPost userId={userId} />;
       case "search":
-        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange}/>;
+        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
       case "friends":
-        return <Friends userLogedIn={userLogedIn} userId={userId}/>;
+        return <Friends userLogedIn={userLogedIn} userId={userId} />;
       case "profile":
-        return <Profile userId={userId} username={username} userLogedIn={userLogedIn}/>;
+        return <Profile userId={userId} username={username} userLogedIn={userLogedIn} />;
       default:
         return null;
     }
   };
 
-  
-    return (
+
+  return (
+    <div className="">
       <div className="">
-        <div className="">
-        <Header />
-        </div>
-        {<main>{renderComponent()}</main>}
-        <Navbar setComponent={setComponent}/>
+        <Header onSportSelect={handleSportSelect}/>
       </div>
-    );
-  };
+      {<main>{renderComponent()}</main>}
+      <Navbar setComponent={setComponent} />
+    </div>
+  );
+};

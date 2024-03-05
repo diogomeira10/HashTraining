@@ -18,7 +18,6 @@ import { FaVolleyballBall } from "react-icons/fa"; //VolleyballBall
 //Profile icons
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
-import { PiPlugBold } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa6";
 
 
