@@ -14,7 +14,7 @@ function App() {
   const [imageProfile,setImageProfile] = useState("")
   const[token, setToken] = useState("")
   const [userId, setUserId] = useState("")
-  console.log(userId)
+  console.log('Eu sou o user Id', userId)
 
 
 

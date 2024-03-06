@@ -11,30 +11,34 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    type: String
   }],
   comments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment'
+    content: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true
+    }
   }],
   imageUrl: {
     type: String,
     required: true
   },
   username: {
-    type: String, 
+    type: String,
     required: true
   },
-  sport: { //added
+  sport: {
     type: String,
     required: true
   }
 },
-{
-    timestamps:true,
-}
-);
+  {
+    timestamps: true,
+  });
 
 const Post = mongoose.model('Post', postSchema);
 

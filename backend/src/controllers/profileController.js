@@ -46,6 +46,16 @@ const getUserProfileImage = async (req, res) => {
     }
 }
 
+const addComment = async (req,res) => {
+    const { username } = req.body
+
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 
 
 module.exports = {

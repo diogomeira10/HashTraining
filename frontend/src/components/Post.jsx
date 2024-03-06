@@ -40,9 +40,14 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
     const [isLiked, setIsLiked] = useState(false)
     const [isConnected, setIsConnected] = useState(false);
     const [showComments, setShowComments] = useState(false)
-    console.log(showComments)
+    const [comment, setComment] = useState('')
+    // console.log(showComments)
+    // console.log(comment)
+    // console.log(postId)
 
-
+    const handleCommentChange = (e) => {
+        setComment(e.target.value)
+    }
 
     const handleOpenComments = () => {
         setShowComments(!showComments)
@@ -51,8 +56,6 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
     const handleCloseComments = () => {
         setShowComments(false)
     }
-
-
 
 
     const handleHeartClick = () => {
@@ -116,11 +119,9 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
         setUsername(username)
     }
 
-
-
     return (
         <div>
-            <div className='w-80 h-96 mb-40'>
+            <div className='w-80 h-96 mb-36'>
 
                 <div onClick={handleUserClick} className='flex justify-between items-center mb-3'>
                     <div className='flex items-center'>
@@ -157,7 +158,7 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                     <p className="font-thin mt-1 text-xs">{content}</p>
                 </div>
             </div>
-            {showComments && <Comments closeComments={handleCloseComments}/>}
+            {showComments && <Comments setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments}/>}
             
         </div>
     )

@@ -25,8 +25,6 @@ export function Layout({ userId, username, userLogedIn }) {
     setFilterSport(sport)
   }
 
-
-
   //---------------------------
 
 
@@ -68,7 +66,7 @@ export function Layout({ userId, username, userLogedIn }) {
   return (
     <div className="">
       <div className="">
-        <Header onSportSelect={handleSportSelect}/>
+        <Header onSportSelect={handleSportSelect} />
       </div>
       {<main>{renderComponent()}</main>}
       <Navbar setComponent={setComponent} />
