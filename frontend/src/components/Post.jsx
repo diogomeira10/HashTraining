@@ -32,15 +32,16 @@ import { Comments } from './Comments';
 
 
 
-export function Post({ content, imgUrl, username, sport, showProfile, setUsername, postId }) {
+export function Post({ content, imgUrl, username, sport, showProfile, setUsername, postId, userLogedIn }) {
 
- 
+
 
     const [profileImage, setProfileImage] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
     const [isConnected, setIsConnected] = useState(false);
     const [showComments, setShowComments] = useState(false)
     const [comment, setComment] = useState('')
+    const [likes, setLikes] = useState(null)
     // console.log(showComments)
     // console.log(comment)
     // console.log(postId)
@@ -60,10 +61,12 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
 
     const handleHeartClick = () => {
         setIsLiked(!isLiked)
+        handleLikePost()
     }
 
     const handleLightningClick = () => {
         setIsConnected(!isConnected);
+        addFriendShip()
     };
 
     useEffect(() => {
@@ -81,8 +84,57 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
             }
         };
 
+        const getLikesOfPost = async () => {
+            try {
+                const response = await fetch(`/api/post/getLikes/${postId}`)
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch likes');
+                }
+
+                const data = await response.json()
+                setLikes(data.likes.length)
+
+                if (data.likes.includes(username)) {
+                    setIsLiked(true)
+                }
+                console.log('Likes', data.likes)
+
+            } catch (error) {
+                console.error('Error fetching likes:', error);
+            }
+
+
+
+
+        }
+        const getUserFriends = async () => {
+            try {
+                const response = await fetch(`/api/friends/${userLogedIn}`)
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user friends');
+                }
+                const data = await response.json()
+                console.log(data)
+
+                const isFriend = data.some(friend => friend.friend === username);
+                console.log(data)
+                if (isFriend) {
+                    setIsConnected(true);
+                }
+
+            } catch (error) {
+                console.error('Error fetching number of posts', error);
+
+            }
+        }
+
+
+        getUserFriends()
+        getLikesOfPost()
         getProfileImage()
-    })
+    }, [])
+
 
 
     const getSportIcon = (sport) => {
@@ -119,6 +171,52 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
         setUsername(username)
     }
 
+    const handleLikePost = async () => {
+        try {
+            const response = await fetch(`/api/post/${postId}/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username })
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to like/unlike post');
+            }
+
+            const data = await response.json()
+            console.log(data.message)
+
+        } catch (error) {
+            console.error('Error liking/unliking post:', error);
+        }
+    }
+
+    const addFriendShip = async () => {
+        try {
+            const response = await fetch('/api/addFriend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user1: userLogedIn, user2: username }),
+            });
+
+            if (!response.ok) {
+               
+                throw new Error('Error adding friendship');
+            }
+
+            const friendship = await response.json();
+            console.log('Friendship added:', friendship);
+            return friendship;
+        } catch (error) {
+            console.error('Error adding friendship:', error.message);
+            throw error;
+        }
+    }
+
     return (
         <div>
             <div className='w-80 h-96 mb-36'>
@@ -135,21 +233,22 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                 <div className='max-w-full h-full overflow-hidden'>
                     <img className='w-full h-full object-cover rounded-xl' src={imgUrl} alt='post_image' />
                 </div>
-                <div className='flex gap-3 mt-2 ml-2'>
+                <div className='flex gap-6 mt-2 ml-2'>
                     <div className="heart-container " onClick={handleHeartClick}>
                         <div className={`heart-icon ${isLiked ? 'liked' : ''}`}>
                             {isLiked ? <FaHeart className="text-xl" style={{ color: '#419EF4' }} /> : <FaRegHeart className="text-xl" />}
                         </div>
                     </div>
-                    <div className="lightning-container">
+                    {(username !== userLogedIn && <div onClick={handleLightningClick} className="lightning-container">
                         {isConnected ? (
-                            <PiPlugsConnectedBold className={`text-xl text-yellow-500 ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick} />
+                            <PiPlugsConnectedBold className={`text-xl text-yellow-500 ml-4 ${isConnected ? 'connected' : ''}`} />
                         ) : (
-                            <div className={`lightning text-xl ml-4 ${isConnected ? 'connected' : ''}`} onClick={handleLightningClick}><PiPlugsBold /></div>
+                            <div className={`lightning text-xl ml-4 ${isConnected ? 'connected' : ''}`}><PiPlugsBold /></div>
                         )}
-                    </div>
-                    <div onClick={handleOpenComments}>
-                    <FaRegComment className="text-xl" />
+                    </div>)}
+
+                    <div className='' onClick={handleOpenComments}>
+                        <FaRegComment className="text-xl" />
 
                     </div>
                 </div>
@@ -158,8 +257,8 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                     <p className="font-thin mt-1 text-xs">{content}</p>
                 </div>
             </div>
-            {showComments && <Comments setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments}/>}
-            
+            {showComments && <Comments setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments} />}
+
         </div>
     )
 }

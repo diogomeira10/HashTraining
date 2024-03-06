@@ -15,6 +15,8 @@ export function Layout({ userId, username, userLogedIn }) {
   const [showProfile, setShowProfile] = useState(false)
   const [selectedUsername, setSelectedUsername] = useState('');
 
+  const showBackButton = true
+
 
 
   //FILTER POSTS LOGIC AND STATE
@@ -48,13 +50,13 @@ export function Layout({ userId, username, userLogedIn }) {
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return showProfile ? <Profile /* userLogedIn={userLogedIn} */ goBack={goBack} username={selectedUsername} /> : <Feed filterSport={filterSport} userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
+        return showProfile ? <Profile showBackButton={showBackButton} userLogedIn={userLogedIn} goBack={goBack} username={selectedUsername} /> : <Feed filterSport={filterSport} userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
       case "add":
         return <AddPost userId={userId} />;
       case "search":
-        return showProfile ? <Profile goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
+        return showProfile ? <Profile userLogedIn={userLogedIn} showBackButton={showBackButton}  goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
       case "friends":
-        return <Friends userLogedIn={userLogedIn} userId={userId} />;
+        return <Friends  userLogedIn={userLogedIn} userId={userId} />;
       case "profile":
         return <Profile userId={userId} username={username} userLogedIn={userLogedIn} />;
       default:

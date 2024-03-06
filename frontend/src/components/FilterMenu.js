@@ -20,7 +20,7 @@ export function FilterMenu ({onSportSelect ,closeBurgerMenu}) {
     const sports = ['all of them','football','rugby','tennis','basketball','swimming','boxing','surfing','skateboarding','snowboarding','cycling','volleyball']
 
     const renderedSports = sports.map((sport) => {
-        return <div onClick={() => handleSportClick(sport)}><span className='text-blue'>#</span>{sport}</div>
+        return <div key={sport._id} onClick={() => handleSportClick(sport)}><span className='text-blue'>#</span>{sport}</div>
     })
 
 

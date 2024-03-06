@@ -55,42 +55,6 @@ const getPosts = async (req, res) => {
 
 
 
-// //Like Post
-// const likePost = async (req, res) => {
-//   const { postId } = req.params;
-//   const { userId } = req.body;
-
-//   try {
-//     const post = await Post.findById(postId);
-//     if (!post) {
-//       return res.status(404).json({ message: 'Post not found' });
-//     }
-
-//     const user = await Users.findById(userId);
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-
-//     const alreadyLikedIndex = post.likes.indexOf(user.username);
-//     if (alreadyLikedIndex !== -1) {
-
-//       post.likes.splice(alreadyLikedIndex, 1);
-//       await post.save();
-//       return res.status(200).json({ message: 'Post unliked successfully' });
-//     } else {
-
-//       post.likes.push(user.username);
-//       await post.save();
-//       return res.status(200).json({ message: 'Post liked successfully' , post, user});
-//     }
-//   } catch (error) {
-//     console.error('Error liking/unliking post:', error);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
-
-
 const likePost = async (req, res) => {
   const { postId } = req.params;
   const { username } = req.body;

@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 import { useState, useEffect } from "react";
 
-export function Profile({username, goBack, userLogedIn, showLightning}) {
+export function Profile({username, goBack, userLogedIn, showBackButton}) {
 
   console.log(userLogedIn)
 
@@ -130,7 +130,7 @@ const renderedPosts = posts.map((post) => {
 
   return (
     <div className="text-white pt-16 font-bold">
-      {showIcon && (
+      {showBackButton && (
         <div className='absolute text-3xl left-4' onClick={goBack}> 
         <IoMdArrowRoundBack />
         </div>
@@ -158,10 +158,11 @@ const renderedPosts = posts.map((post) => {
             </div>
           </div>
       </div>
-      <div className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
+      
+      <div className="flex justify-center border-b-2 border-blue-400 pb-4">
       {showIcon && (
         <div onClick={handleLightningClick} className="flex justify-center mt-14 border-b-2 border-blue-400 pb-4">
-          <FaBoltLightning style={{color: "yellow"}} />
+          {userLogedIn !== username && <FaBoltLightning style={{color: "yellow"}} />}
         </div>
       )}
       </div>
