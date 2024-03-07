@@ -11,12 +11,8 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
   const [showIcon, setShowIcon] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [connections, setConnections] = useState(null);
-
-  // console.log(profileImage)
-  // console.log(username)
-  // console.log(userLogedIn)
-  // console.log(connections)
-  //  console.log(connectionsList)
+  const [alreadyFriends, setAlreadyFriends] = useState(false)
+  console.log(alreadyFriends)
 
   useEffect(() => {
     const getNumberOfPosts = async () => {
@@ -70,7 +66,16 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
         }
         const data = await response.json();
         setConnections(data.length);
-        /* setConnectionsList(data) */
+        console.log(data)
+        
+        const areFriends = data.some(
+          friend =>
+            (friend.user === userLogedIn && friend.friend === username) ||
+            (friend.user === username && friend.friend === userLogedIn)
+        );
+        setAlreadyFriends(areFriends);
+        
+
       } catch (error) {
         console.error("Error fetching number of posts", error);
         setConnections(null);
@@ -81,7 +86,7 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
     getNumberOfPosts();
     getPostsOfUser();
     getUserFriends();
-  }, [username]);
+  }, [username, alreadyFriends]);
 
   useEffect(() => {
     setShowIcon(username !== userLogedIn);
@@ -117,9 +122,46 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
     }
   };
 
-  const handleLightningClick = () => {
-    addFriendShip();
+  const removeFriendship = async () => {
+    try {
+      const response = await fetch('/api/friends/removeFriendship', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user1: userLogedIn, user2: username }),
+      });
+  
+      if (!response.ok) {
+        console.error('Error removing friendship:', response.statusText);
+        throw new Error('Failed to remove friendship'); // Re-throw for handling
+      }
+  
+      const data = await response.json(); // Might be empty on success
+      console.log('Friendship removed:', data);
+    } catch (error) {
+      console.error('Error removing friendship:', error.message);
+      // Handle errors gracefully (e.g., display an error message to the user)
+    }
   };
+
+
+
+  const handleLightningClick = async () => {
+    try {
+      if (alreadyFriends) {
+        await removeFriendship();
+      } else {
+        const friendship = await addFriendShip();
+        console.log("Friendship added:", friendship);
+      }
+      setAlreadyFriends((prev) => !prev); // Toggle the state
+    } catch (error) {
+      console.error("Error managing friendship:", error.message);
+      // Handle any errors here
+    }
+  };
+  
 
   return (
     <div className="text-white pt-16 font-bold">
@@ -149,11 +191,11 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
         </div>
       </div>
 
-      <div className="absolute right-14 top-52 border-blue-400">
+      <div className="absolute right-11 top-52 border-blue-400 ">
         {showIcon && (
-          <div onClick={handleLightningClick} className="border-blue-400">
+          <div onClick={handleLightningClick} className={`flex items-center justify-center w-10 h-10 border-2 border-blue-400 rounded-full cursor-pointer ${alreadyFriends ? 'text-blue' : 'text-yellow-500'}`}>
             {userLogedIn !== username && (
-              <FaBoltLightning style={{ color: "yellow" }} />
+              <FaBoltLightning className="text-2xl" />
             )}
           </div>
         )}

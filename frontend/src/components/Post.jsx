@@ -1,5 +1,3 @@
-import '../heart.css'
-
 //Sports Icons
 import { IoMdFootball } from "react-icons/io"; //futebol
 import { FaFootballBall } from "react-icons/fa"; //raguebi

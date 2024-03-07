@@ -76,7 +76,7 @@ export function Comments({ onChange, content, postId, username, setComment }) {
 
 
         <form className='flex bottom-44 left-0 right-0 mb-5' onSubmit={handleSubmit}>
-            <Input className='w-full' type='text' value={content} onChange={onChange} />
+            <input placeholder="write your comment here..." className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs w-full" type='text' value={content} onChange={onChange} />
             <div className='ml-1 mt-1'>
                 <button className='text-xl' type="submit">
                     <IoSend />

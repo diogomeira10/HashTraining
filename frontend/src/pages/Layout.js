@@ -13,6 +13,8 @@ export function Layout({ userId, username, userLogedIn }) {
 
   const [component, setComponent] = useState("home")
   const [showProfile, setShowProfile] = useState(false)
+  const [showProfileInFeed,setShowProfileInFeed] = useState(false)
+  const [showProfileInSearch,setShowProfileInSearch] = useState(false)
   const [selectedUsername, setSelectedUsername] = useState('');
   const [showHeader, setShowHeader] = useState(true); 
 
@@ -55,23 +57,32 @@ export function Layout({ userId, username, userLogedIn }) {
     setSelectedUsername(username)
   }
 
-  const handleShowProfile = () => {
-    setShowProfile(true)
+  const handleShowProfileInFeed = () => {
+    setShowProfileInFeed(true)
+  }
+  const handleShowProfileInSearch = () => {
+    setShowProfileInSearch(true)
   }
 
-  const goBack = () => {
-    setShowProfile(false)
+
+  const goBackInFeed = () => {
+    setShowProfileInFeed(false)
   }
+  const goBackInSearch = () => {
+    setShowProfileInSearch(false)
+  }
+
+
 
 
   const renderComponent = () => {
     switch (component) {
       case "home":
-        return showProfile ? <Profile showBackButton={showBackButton} userLogedIn={userLogedIn} goBack={goBack} username={selectedUsername} /> : <Feed filterSport={filterSport} userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
+        return showProfileInFeed ? <Profile showBackButton={showBackButton} userLogedIn={userLogedIn} goBack={goBackInFeed} username={selectedUsername} /> : <Feed filterSport={filterSport} userLogedIn={userLogedIn} userId={userId} username={selectedUsername} showProfile={handleShowProfileInFeed} setUsername={handleUsernameChange} />;
       case "add":
         return <AddPost userId={userId} />;
       case "search":
-        return showProfile ? <Profile userLogedIn={userLogedIn} showBackButton={showBackButton}  goBack={goBack} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfile} setUsername={handleUsernameChange} />;
+        return showProfileInSearch ? <Profile userLogedIn={userLogedIn} showBackButton={showBackButton}  goBack={goBackInSearch} username={selectedUsername} /> : <Search userId={userId} showProfile={handleShowProfileInSearch} setUsername={handleUsernameChange} />;
       case "friends":
         return <Friends  userLogedIn={userLogedIn} userId={userId} />;
       case "profile":
