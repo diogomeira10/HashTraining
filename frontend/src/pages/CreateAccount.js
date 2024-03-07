@@ -40,26 +40,26 @@ export function CreateAccount({email, password, confirmPassword,  onChangePasswo
         <form className="pl-4 flex-col">
             <div className="flex-col">
                 <h3 className="text-white ">Username</h3>
-                <input className="text-black rounded" type="text" value={email} onChange={onChangeEmail}/>
+                <input className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" type="text" value={email} onChange={onChangeEmail}/>
             </div>
 
             <div className="mt-8">
           <h3 className="text-white">Password</h3>
-          <input type="password" className="text-black rounded" value={password} onChange={onChangePassword}  />
+          <input type="password" className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" value={password} onChange={onChangePassword}  />
             </div>
 
             <div className="mt-8">
           <h3 className="text-white">Verify password</h3>
-          <input type="password" className="text-black rounded" value={confirmPassword} onChange={onChangeConfirmPassword}/>
+          <input type="password" className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" value={confirmPassword} onChange={onChangeConfirmPassword}/>
             </div>
 
             <div className="mt-8">
           <h3 className="text-white">Profile Image</h3>
-          <input type="text" className="text-black rounded" value={imageProfile} onChange={onChangeImageProfile}/>
+          <input type="text" className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" value={imageProfile} onChange={onChangeImageProfile}/>
             </div>
         </form>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 flex flex-col items-center gap-2">
         <div>
           <button onClick={handleAccountCreate} className="font-bold">Create Account</button>
         </div>

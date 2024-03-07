@@ -41,24 +41,23 @@ export function Home({ email, password, onChangeEmail, onChangePassword, handleT
       <div className="flex justify-center items-center">
         <form className="pl-4 flex-col">
             <div className="flex-col">
-                <h3 className="text-white mb-1 text-xs">Username</h3>
-                <input className="text-white border-2 rounded"  style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }} type="text" value={email} onChange={onChangeEmail} />
+                <h3 className="text-white mb-1">Username</h3>
+                <input className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" type="text" value={email} onChange={onChangeEmail} />
             </div>
 
             <div className="mt-8">
-          <h3 className="text-white mb-1 text-xs">Password</h3>
-          <input className="text-white border-2 rounded"  style={{ backgroundColor: '#333553', borderRadius: '5px', borderColor: '#419EF4' }} value={password} onChange={onChangePassword} type="password" />
+          <h3 className="text-white mb-1">Password</h3>
+          <input className="bg-gray-200 text-gray-800 rounded-lg p-2 text-sm max-w-xs" onChange={onChangePassword} type="password" />
             </div>
         </form>
       </div>
-      <div className="mt-6">
+      <div className="flex flex-col items-center gap-2 mt-6">
         <button onClick={handleLogin}>
             <p className="font-bold">Login</p>
         </button>
         <Link to="/createAccount">
-            <p className="font-bold">Criar Conta</p>
+            <p className="font-bold">Create Account</p>
         </Link>
-        
       </div>
     </div>
   );
