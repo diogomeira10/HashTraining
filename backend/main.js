@@ -6,6 +6,7 @@ const userRoutes = require("./src/routes/user");
 const postRoutes = require("./src/routes/post")
 const friendsRoutes = require("./src/routes/friends")
 const profileRoutes = require("./src/routes/profile")
+const messagesRoutes = require("./src/routes/messages")
 
 app.use(express.json());
 
@@ -18,6 +19,8 @@ app.use('/api', userRoutes);
 app.use('/api', postRoutes);
 app.use("/api", friendsRoutes)
 app.use("/api", profileRoutes)
+app.use("/api", messagesRoutes)
+
 
 
 connectToDatabase().then(() => {

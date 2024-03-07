@@ -25,7 +25,7 @@ export function Comments({ onChange, content, postId, username, setComment }) {
             }
         }
         fetchComments()
-    }, [])
+    }, [comments])
 
     const addComment = async () => {
         try {

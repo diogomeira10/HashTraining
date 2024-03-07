@@ -14,6 +14,23 @@ export function Layout({ userId, username, userLogedIn }) {
   const [component, setComponent] = useState("home")
   const [showProfile, setShowProfile] = useState(false)
   const [selectedUsername, setSelectedUsername] = useState('');
+  const [showHeader, setShowHeader] = useState(true); 
+
+  const handleScroll = () => {
+    const scrolled = window.scrollY;
+    if (scrolled > 50) { // You can adjust this threshold as per your requirement
+      setShowHeader(false);
+    } else {
+      setShowHeader(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const showBackButton = true
 
@@ -68,7 +85,7 @@ export function Layout({ userId, username, userLogedIn }) {
   return (
     <div className="">
       <div className="">
-        <Header onSportSelect={handleSportSelect} />
+      {showHeader && <Header onSportSelect={handleSportSelect} />}
       </div>
       {<main>{renderComponent()}</main>}
       <Navbar setComponent={setComponent} />
