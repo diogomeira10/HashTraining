@@ -76,7 +76,7 @@ export function AddPost({ userId }) {
             onChange={handleSportChange} />
 
           <div className="flex justify-center">
-            <button className="mt-5 border-2 rounded-xl w-24 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
+            <button className="mt-10 border-2 border-blue  rounded-xl w-28 font-bold p-2 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">Add Post</button>
           </div>
         </form>
       </div>
