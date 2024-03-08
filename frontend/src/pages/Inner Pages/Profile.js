@@ -94,7 +94,7 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
 
   const renderedPosts = posts.map((post) => {
     return (
-      <img className="w-28 h-28 rounded" src={post.imageUrl} alt="post_image" />
+      <img className="w-44 h-44 rounded" src={post.imageUrl} alt="post_image" />
     );
   });
 
@@ -173,7 +173,7 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
 
       <div className="flex justify-around mt-16 gap-6">
         <div className="flex-col w-20">
-          <img className="rounded-full" src={profileImage} alt="user_img" />
+          <img className="rounded-3xl" src={profileImage} alt="user_img" />
           <p>{username}</p>
         </div>
 
@@ -201,7 +201,7 @@ export function Profile({ username, goBack, userLogedIn, showBackButton }) {
         )}
       </div>
       <div className="">
-        <div className="flex border-t-2 ml-2 mr-2 pt-6 border-blue-400 gap-4 mt-4 flex-wrap h-full">
+        <div className="flex border-t-2 ml-3 pt-6 border-blue-400 gap-4 mt-4 flex-wrap h-full">
           {renderedPosts}
         </div>
       </div>

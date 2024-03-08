@@ -69,7 +69,7 @@ export function Friends({ userLogedIn }) {
           borderColor: "#419EF4",
           height: "100vh",
         }}
-        className="flex justify-center border w-4/5 p-8 rounded "
+        className="flex gap-3 flex-col items-center border w-4/5 p-8 rounded "
       >
         {renderedFriends}
       </div>

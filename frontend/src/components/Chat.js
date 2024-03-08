@@ -77,7 +77,7 @@ export function Chat({ user, friend, onClose }) {
     >
       <div
         className={`bg-gray-300 p-2 rounded-lg ${
-          msg.sender === user ? "bg-green-500 text-white ml-auto mr-2" : "bg-gray-400"
+          msg.sender === user ? "bg-green-500 text-white ml-auto mr-2 rounded-br-none" : "bg-gray-400 rounded-bl-none"
         }`}
       >
         <span className="font-bold">{msg.sender !== user && msg.sender}</span>
@@ -87,13 +87,13 @@ export function Chat({ user, friend, onClose }) {
   ));
 
   return (
-    <div ref={chatRef} className="text-white mb-24 justify-center flex w-96 h-96 rounded">
+    <div ref={chatRef} className="text-white mb-24 justify-center flex w-full h-full pt-96 pb-4 rounded">
       <form onSubmit={handleMessageSubmit} className="border relative w-4/5 bg-white rounded">
         <div className="text-center py-2 bg-gray-400 mb-2">{friend}</div>
         <div onClick={onClose} className="text-red-500 text-3xl flex justify-end absolute top-1 right-0">
           <IoMdCloseCircleOutline />
         </div>
-        <div className="max-h-72 overflow-auto">{renderedMessages}</div>
+        <div className="max-h-96 overflow-auto pb-10">{renderedMessages}</div>
         <input
           value={message}
           onChange={handleMessageChange}

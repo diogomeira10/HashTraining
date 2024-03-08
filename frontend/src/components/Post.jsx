@@ -252,7 +252,7 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                 </div>
                 <div className='flex gap-5 ml-2 mt-2'>
                     <p className='font-bold'>{username}</p>
-                    <p className="font-thin mt-1 text-xs">{content}</p>
+                    <p className="font-semibold mt-1 text-xs">{content}</p>
                 </div>
             </div>
             {showComments && <Comments setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments} />}
