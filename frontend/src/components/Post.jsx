@@ -255,7 +255,7 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                     <p className="font-semibold mt-1 text-xs">{content}</p>
                 </div>
             </div>
-            {showComments && <Comments setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments} />}
+            {showComments && <Comments userLogedIn={userLogedIn} setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments} />}
 
         </div>
     )

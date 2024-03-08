@@ -1,10 +1,9 @@
 import { IoSend } from "react-icons/io5";
-import { Input } from "./Input"
 import { useState, useEffect } from "react";
 import { CommentCard } from "./CommentCard";
 
 
-export function Comments({ onChange, content, postId, username, setComment }) {
+export function Comments({ onChange, content, postId, username, setComment, userLogedIn }) {
 
 
     const [comments, setComments] = useState([])
@@ -58,7 +57,7 @@ export function Comments({ onChange, content, postId, username, setComment }) {
 
 
     const renderedComments = comments.map((post) => {
-        return <CommentCard user={post.username} content={post.content} />
+        return <CommentCard user={ userLogedIn} content={post.content} />
     }).reverse()
 
 
