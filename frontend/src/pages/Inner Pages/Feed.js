@@ -24,6 +24,7 @@ export function Feed({ showProfile, setUsername, userLogedIn, filterSport }) {
         username={post.username}
         userLogedIn={userLogedIn}
         postId={post._id}
+        creationDate={post.createdAt}
       />
     ))
     .reverse();

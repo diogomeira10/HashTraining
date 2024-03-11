@@ -26,11 +26,12 @@ import { PiPlugsConnectedBold } from "react-icons/pi";
 
 import { useEffect, useState } from "react";
 import { Comments } from './Comments';
+import { formatDistanceToNow } from 'date-fns'
 
 
 
 
-export function Post({ content, imgUrl, username, sport, showProfile, setUsername, postId, userLogedIn }) {
+export function Post({ content, imgUrl, username, sport, showProfile, setUsername, postId, userLogedIn, creationDate }) {
 
 
 
@@ -254,6 +255,8 @@ export function Post({ content, imgUrl, username, sport, showProfile, setUsernam
                     <p className='font-bold'>{username}</p>
                     <p className="font-semibold mt-1 text-xs">{content}</p>
                 </div>
+                <p className="font-light text-xs ml-2">{formatDistanceToNow(new Date(creationDate))}</p>
+                
             </div>
             {showComments && <Comments userLogedIn={userLogedIn} setComment={setComment} username={username} postId={postId} content={comment} onChange={handleCommentChange} closeComments={handleCloseComments} />}
 
